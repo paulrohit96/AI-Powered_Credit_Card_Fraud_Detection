@@ -151,38 +151,3 @@ with st.container():
     st.markdown("</div>", unsafe_allow_html=True)
 
     st.markdown("</div>", unsafe_allow_html=True)
-
-# AI Chatbot section
-with st.container():
-    st.markdown("<div class='section chat-container'>", unsafe_allow_html=True)
-    st.write("## Fraud Investigation Assistant")
-
-    if "messages" not in st.session_state:
-        st.session_state.messages = []
-
-    for message in st.session_state.messages:
-        with st.chat_message(message["role"]):
-            st.markdown(message["content"])
-
-    if prompt := st.chat_input("Ask a question about fraud detection..."):
-        st.session_state.messages.append({"role": "user", "content": prompt})
-        with st.chat_message("user"):
-            st.markdown(prompt)
-
-        with st.chat_message("assistant"):
-            message_placeholder = st.empty()
-            full_response = ""
-
-            # Simulated response - replace with actual OpenAI API call
-            assistant_response = f"I'm your AI assistant for fraud detection. You asked: '{prompt}'. In a real implementation, this would connect to OpenAI's API."
-
-            # Simulate streaming
-            for chunk in assistant_response.split():
-                full_response += chunk + " "
-                message_placeholder.markdown(full_response + "▌")
-                time.sleep(0.05)
-            message_placeholder.markdown(full_response)
-
-        st.session_state.messages.append({"role": "assistant", "content": full_response})
-
-    st.markdown("</div>", unsafe_allow_html=True)
